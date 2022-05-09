@@ -7,4 +7,4 @@
  - CSS3;
  - БЭМ.
 
-## Ссылка на Github-pages: https://kirillkamratov.github.io/mesto/
+## Ссылка на Github-pages:   https://kirillkamratov.github.io/mesto-project/
