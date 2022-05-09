@@ -1,0 +1,27 @@
+.pop-up__text {
+  outline: none;
+  border: none;
+  margin: 0 0 30px 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.pop-up__text:last-of-type {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 767px) {
+  .pop-up__text {
+    font-size: 14px;
+    line-height: 17px;
+    padding-bottom: 9px;
+  }
+
+  .pop-up__text:last-of-type {
+    margin-bottom: 45px;
+  }
+}

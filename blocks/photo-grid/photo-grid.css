@@ -1,0 +1,11 @@
+.photo-grid {
+  width: calc(100% - 400px);
+  padding: 50px 0 0;
+}
+
+@media screen and (max-width: 767px) {
+  .photo-grid {
+    width: calc(100% - 38px);
+    padding-top: 36px;
+  }
+}

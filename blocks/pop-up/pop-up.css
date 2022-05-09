@@ -1,0 +1,16 @@
+.pop-up {
+  background-color: rgba(0, 0, 0, .5);
+  width: 100%;
+  line-height: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  margin: 0;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  display: none
+}
+
+

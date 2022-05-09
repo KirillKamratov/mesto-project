@@ -1,0 +1,6 @@
+.photo-grid__caption {
+  margin: 25px 15px 26px 21px;
+  display: flex;
+  justify-content: space-between;
+  line-height: 0;
+}
