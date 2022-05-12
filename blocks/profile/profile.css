@@ -8,9 +8,6 @@
   margin: 0;
   line-height: 0;
   row-gap: 9px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 @media screen and (max-width: 1279px) {
