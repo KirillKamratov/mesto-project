@@ -54,7 +54,7 @@ editForm.addEventListener('submit', evt => {
 });
 // 3. Закрытие формы
 editForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  editForm.classList.remove('pop-up_opened')
+  editForm.classList.remove('pop-up_opened');
 });
 
 // код "6 карточек из коробки"
@@ -63,8 +63,13 @@ function createCard(title, link) {
   newCard.querySelector('.photo-grid__photo').src = link;
   newCard.querySelector('.photo-grid__photo').alt = title;
   newCard.querySelector('.photo-grid__name').textContent = title;
+  // код лайка карточек
   newCard.querySelector('.photo-grid__like-button').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('photo-grid__like-button_liked')
+    evt.target.classList.toggle('photo-grid__like-button_liked');
+  });
+  // код удаления карточек
+  newCard.querySelector('.photo-grid__delete-button').addEventListener('click', (evt) =>{
+    evt.target.closest('li').remove();
   });
   return newCard;
 }
@@ -93,3 +98,6 @@ addForm.addEventListener('submit', evt => {
 addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
   addForm.classList.remove('pop-up_opened')
 });
+
+
+
