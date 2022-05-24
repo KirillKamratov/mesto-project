@@ -38,7 +38,6 @@ const addForm = document.querySelector('#add-form');
 const inputPlaceName = addForm.querySelector('[name = "place-name"]');
 const inputLink = addForm.querySelector('[name = "link"]');
 
-
 // код формы "редактировать профиль":
 // 1. Открытие формы
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
@@ -64,13 +63,18 @@ function createCard(title, link) {
   newCard.querySelector('.photo-grid__photo').src = link;
   newCard.querySelector('.photo-grid__photo').alt = title;
   newCard.querySelector('.photo-grid__name').textContent = title;
+  newCard.querySelector('.photo-grid__like-button').addEventListener('click', (evt) => {
+    evt.target.classList.toggle('photo-grid__like-button_liked')
+  });
   return newCard;
 }
+
 // функция добавления карточек(из коробки+новых)
 function addCard(title, link) {
   const card = createCard(title, link);
   photoGridList.prepend(card);
 }
+
 //добавление карточек из коробки
 initialCards.forEach(item => addCard(item.name, item.link));
 
@@ -82,12 +86,10 @@ document.querySelector('.profile__add-button').addEventListener('click', () => {
 // 2. Добавление карточек
 addForm.addEventListener('submit', evt => {
   evt.preventDefault();
-  addCard(title = inputPlaceName.value, link = inputLink.value);
+  addCard(inputPlaceName.value, inputLink.value);
   addForm.classList.remove('pop-up_opened')
 });
 // 3. Закрытие формы
 addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
   addForm.classList.remove('pop-up_opened')
-})
-
-
+});
