@@ -47,24 +47,34 @@ const popUpSubtitle = popUpPhoto.querySelector('.pop-up__image-subtitle');
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description');
 
+//функция открытия поп-апов
+function openPopup (popup) {
+  popup.classList.add('pop-up_opened');
+}
+
+//функция закрытия поп-апов
+function closePopup (popup) {
+  popup.classList.remove('pop-up_opened');
+}
+
 
 // код формы "редактировать профиль":
 // 1. Открытие формы
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  editForm.classList.add('pop-up_opened');
+  openPopup(editForm)
 });
 //2. Редактирование информации о себе
 editForm.addEventListener('submit', evt => {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
-  profileName.textContent = descriptionInput.value;
-  editForm.classList.remove('pop-up_opened');
+  profileDescription.textContent = descriptionInput.value;
+  closePopup(editForm);
 });
 // 3. Закрытие формы
 editForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  editForm.classList.remove('pop-up_opened');
+  closePopup(editForm)
 });
 
 // код "6 карточек из коробки"
@@ -84,7 +94,7 @@ function createCard(title, link) {
   });
   //код открытия поп апа с картинкой
   photoGridPhoto.addEventListener('click', () => {
-    popUpImage.classList.add('pop-up_opened');
+    openPopup(popUpImage);
     popUpPhoto.src = link;
     popUpPhoto.alt = title
     popUpSubtitle.textContent = title;
@@ -94,7 +104,7 @@ function createCard(title, link) {
 
 // закрытие поп апа с картинкой
 popUpImage.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  popUpImage.classList.remove('pop-up_opened')
+  closePopup(popUpImage);
 });
 
 // функция добавления карточек(из коробки+новых)
@@ -109,7 +119,7 @@ initialCards.forEach(item => addCard(item.name, item.link));
 // код формы добавления карточек:
 // 1. Открытие формы
 document.querySelector('.profile__add-button').addEventListener('click', () => {
-  addForm.classList.add('pop-up_opened');
+  openPopup(addForm)
 });
 // 2. Добавление карточек
 addForm.addEventListener('submit', evt => {
@@ -119,5 +129,5 @@ addForm.addEventListener('submit', evt => {
 });
 // 3. Закрытие формы
 addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  addForm.classList.remove('pop-up_opened')
+  closePopup(addForm)
 });
