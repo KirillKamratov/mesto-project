@@ -38,6 +38,9 @@ const addForm = document.querySelector('#add-form');
 const inputPlaceName = addForm.querySelector('[name = "place-name"]');
 const inputLink = addForm.querySelector('[name = "link"]');
 
+// Переменная поп-апа с картинкой
+const popUpImage = document.querySelector('#pop-up-image');
+
 // код формы "редактировать профиль":
 // 1. Открытие формы
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
@@ -68,11 +71,23 @@ function createCard(title, link) {
     evt.target.classList.toggle('photo-grid__like-button_liked');
   });
   // код удаления карточек
-  newCard.querySelector('.photo-grid__delete-button').addEventListener('click', (evt) =>{
+  newCard.querySelector('.photo-grid__delete-button').addEventListener('click', (evt) => {
     evt.target.closest('li').remove();
+  });
+  //код открытия поп апа с картинкой
+  newCard.querySelector('.photo-grid__photo').addEventListener('click', () => {
+    popUpImage.classList.add('pop-up_opened');
+    popUpImage.querySelector('.pop-up__image').src = link;
+    popUpImage.querySelector('.pop-up__image').alt = title
+    popUpImage.querySelector('.pop-up__image-subtitle').textContent = title;
   });
   return newCard;
 }
+
+// закрытие поп апа с картинкой
+popUpImage.querySelector('.pop-up__close-button').addEventListener('click', () => {
+  popUpImage.classList.remove('pop-up_opened')
+});
 
 // функция добавления карточек(из коробки+новых)
 function addCard(title, link) {
@@ -98,6 +113,3 @@ addForm.addEventListener('submit', evt => {
 addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
   addForm.classList.remove('pop-up_opened')
 });
-
-
-
