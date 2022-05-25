@@ -8,6 +8,7 @@
   position: absolute;
   right: 20px;
   top: 20px;
+  background-repeat: no-repeat;
 }
 
 .photo-grid__delete-button:hover {
