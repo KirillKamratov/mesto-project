@@ -40,19 +40,26 @@ const inputLink = addForm.querySelector('[name = "link"]');
 
 // Переменная поп-апа с картинкой
 const popUpImage = document.querySelector('#pop-up-image');
+const popUpPhoto = popUpImage.querySelector('.pop-up__image');
+const popUpSubtitle = popUpPhoto.querySelector('.pop-up__image-subtitle');
+
+//общие переменные
+const profileName = document.querySelector('.profile__name')
+const profileDescription = document.querySelector('.profile__description');
+
 
 // код формы "редактировать профиль":
 // 1. Открытие формы
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
-  nameInput.value = document.querySelector('.profile__name').textContent;
-  descriptionInput.value = document.querySelector('.profile__description').textContent;
+  nameInput.value = profileName.textContent;
+  descriptionInput.value = profileDescription.textContent;
   editForm.classList.add('pop-up_opened');
 });
 //2. Редактирование информации о себе
 editForm.addEventListener('submit', evt => {
   evt.preventDefault();
-  document.querySelector('.profile__name').textContent = nameInput.value;
-  document.querySelector('.profile__description').textContent = descriptionInput.value;
+  profileName.textContent = nameInput.value;
+  profileName.textContent = descriptionInput.value;
   editForm.classList.remove('pop-up_opened');
 });
 // 3. Закрытие формы
@@ -63,8 +70,9 @@ editForm.querySelector('.pop-up__close-button').addEventListener('click', () => 
 // код "6 карточек из коробки"
 function createCard(title, link) {
   const newCard = cardTemplate.querySelector('li').cloneNode(true);
-  newCard.querySelector('.photo-grid__photo').src = link;
-  newCard.querySelector('.photo-grid__photo').alt = title;
+  const photoGridPhoto = newCard.querySelector('.photo-grid__photo');
+  photoGridPhoto.src = link;
+  photoGridPhoto.alt = title;
   newCard.querySelector('.photo-grid__name').textContent = title;
   // код лайка карточек
   newCard.querySelector('.photo-grid__like-button').addEventListener('click', (evt) => {
@@ -75,11 +83,11 @@ function createCard(title, link) {
     evt.target.closest('li').remove();
   });
   //код открытия поп апа с картинкой
-  newCard.querySelector('.photo-grid__photo').addEventListener('click', () => {
+  photoGridPhoto.addEventListener('click', () => {
     popUpImage.classList.add('pop-up_opened');
-    popUpImage.querySelector('.pop-up__image').src = link;
-    popUpImage.querySelector('.pop-up__image').alt = title
-    popUpImage.querySelector('.pop-up__image-subtitle').textContent = title;
+    popUpPhoto.src = link;
+    popUpPhoto.alt = title
+    popUpSubtitle.textContent = title;
   });
   return newCard;
 }
