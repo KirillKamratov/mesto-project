@@ -69,7 +69,7 @@ editForm.querySelector('.pop-up__close-button').addEventListener('click', () => 
 
 // код "6 карточек из коробки"
 function createCard(title, link) {
-  const newCard = cardTemplate.querySelector('li').cloneNode(true);
+  const newCard = cardTemplate.querySelector('.photo-grid__element').cloneNode(true);
   const photoGridPhoto = newCard.querySelector('.photo-grid__photo');
   photoGridPhoto.src = link;
   photoGridPhoto.alt = title;
@@ -80,7 +80,7 @@ function createCard(title, link) {
   });
   // код удаления карточек
   newCard.querySelector('.photo-grid__delete-button').addEventListener('click', (evt) => {
-    evt.target.closest('li').remove();
+    evt.target.closest('.photo-grid__element').remove();
   });
   //код открытия поп апа с картинкой
   photoGridPhoto.addEventListener('click', () => {
