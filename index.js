@@ -41,7 +41,7 @@ const inputLink = addForm.querySelector('[name = "link"]');
 // Переменная поп-апа с картинкой
 const popUpImage = document.querySelector('#pop-up-image');
 const popUpPhoto = popUpImage.querySelector('.pop-up__image');
-const popUpSubtitle = popUpPhoto.querySelector('.pop-up__image-subtitle');
+const popUpSubtitle = popUpImage.querySelector('.pop-up__image-subtitle');
 
 //общие переменные
 const profileName = document.querySelector('.profile__name')
@@ -95,6 +95,7 @@ function createCard(title, link) {
   //код открытия поп апа с картинкой
   photoGridPhoto.addEventListener('click', () => {
     openPopup(popUpImage);
+    popUpImage.style.backgroundColor = 'rgba(0, 0, 0, .9)';
     popUpPhoto.src = link;
     popUpPhoto.alt = title
     popUpSubtitle.textContent = title;
