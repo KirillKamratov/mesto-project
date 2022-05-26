@@ -95,7 +95,6 @@ function createCard(title, link) {
   //код открытия поп апа с картинкой
   photoGridPhoto.addEventListener('click', () => {
     openPopup(popUpImage);
-    popUpImage.style.backgroundColor = 'rgba(0, 0, 0, .9)';
     popUpPhoto.src = link;
     popUpPhoto.alt = title
     popUpSubtitle.textContent = title;
@@ -126,7 +125,7 @@ document.querySelector('.profile__add-button').addEventListener('click', () => {
 addForm.addEventListener('submit', evt => {
   evt.preventDefault();
   addCard(inputPlaceName.value, inputLink.value);
-  addForm.classList.remove('pop-up_opened')
+  closePopup(addForm);
 });
 // 3. Закрытие формы
 addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
