@@ -40,9 +40,18 @@
     <div class="pop-up__container">
       <button type="button" class="button pop-up__close-button"></button>
       <h2 class="pop-up__title">Редактировать профиль</h2>
-      <form action="#" name="edit-form" class="pop-up__form">
-        <input type="text" class="pop-up__text" name="name">
-        <input type="text" class="pop-up__text" name="description">
+      <form action="#" name="edit-form" class="pop-up__form" novalidate>
+
+        <input type="text" class="pop-up__text" name="name"
+               id="name-edit" value="" minlength="2" maxlength="40"
+               placeholder="Имя" required>
+        <span class="pop-up__error name-edit-error"></span>
+
+        <input type="text" class="pop-up__text" name="description"
+               id="description-edit" value="" minlength="2" maxlength="200"
+               placeholder="Профессия" required>
+        <span class="pop-up__error description-edit-error"></span>
+
         <button type="submit" class="pop-up__save-button">Сохранить</button>
       </form>
     </div>
@@ -84,7 +93,7 @@
   </li>
 </template>
 
-<script src="index.js"></script>
+<script type="module" src="index.js"></script>
 
 </body>
 

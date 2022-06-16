@@ -1,3 +1,4 @@
+import { enableValidation } from "./validate.js";
 // переменные формы "редактировать профиль"
 const editForm = document.querySelector('#edit-form');
 const nameInput = editForm.querySelector('[name="name"]');
@@ -112,4 +113,16 @@ addForm.addEventListener('submit', evt => {
 // 3. Закрытие формы
 addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
   addForm.classList.remove('pop-up_opened')
+});
+
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+
+enableValidation({
+  formSelector: '.pop-up__form',
+  inputSelector: '.pop-up__text',
+  submitButtonSelector: '.pop-up__save-button',
+  inactiveButtonClass: 'pop-up__save-button_disabled',
+  inputErrorClass: 'pop-up__text_type_error',
+  errorClass: 'pop-up__error_active'
 });
