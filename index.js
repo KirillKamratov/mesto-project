@@ -91,7 +91,7 @@ function createCard(title, link) {
   });
   // код удаления карточек
   newCard.querySelector('.photo-grid__delete-button').addEventListener('click', (evt) => {
-    evt.target.closest('.photo-grid__element').remove();
+    evt.target.closest('.photo-grid__item').remove();
   });
   //код открытия поп апа с картинкой
   photoGridPhoto.addEventListener('click', () => {
