@@ -41,31 +41,49 @@ const inputLink = addForm.querySelector('[name = "link"]');
 
 // Переменная поп-апа с картинкой
 const popUpImage = document.querySelector('#pop-up-image');
+const popUpPhoto = popUpImage.querySelector('.pop-up__image');
+const popUpSubtitle = popUpImage.querySelector('.pop-up__image-subtitle');
+
+//общие переменные
+const profileName = document.querySelector('.profile__name')
+const profileDescription = document.querySelector('.profile__description');
+
+//функция открытия поп-апов
+function openPopup (popup) {
+  popup.classList.add('pop-up_opened');
+}
+
+//функция закрытия поп-апов
+function closePopup (popup) {
+  popup.classList.remove('pop-up_opened');
+}
+
 
 // код формы "редактировать профиль":
 // 1. Открытие формы
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
-  nameInput.value = document.querySelector('.profile__name').textContent;
-  descriptionInput.value = document.querySelector('.profile__description').textContent;
-  editForm.classList.add('pop-up_opened');
+  nameInput.value = profileName.textContent;
+  descriptionInput.value = profileDescription.textContent;
+  openPopup(editForm)
 });
 //2. Редактирование информации о себе
 editForm.addEventListener('submit', evt => {
   evt.preventDefault();
-  document.querySelector('.profile__name').textContent = nameInput.value;
-  document.querySelector('.profile__description').textContent = descriptionInput.value;
-  editForm.classList.remove('pop-up_opened');
+  profileName.textContent = nameInput.value;
+  profileDescription.textContent = descriptionInput.value;
+  closePopup(editForm);
 });
 // 3. Закрытие формы
 editForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  editForm.classList.remove('pop-up_opened');
+  closePopup(editForm)
 });
 
 // код "6 карточек из коробки"
 function createCard(title, link) {
-  const newCard = cardTemplate.querySelector('li').cloneNode(true);
-  newCard.querySelector('.photo-grid__photo').src = link;
-  newCard.querySelector('.photo-grid__photo').alt = title;
+  const newCard = cardTemplate.querySelector('.photo-grid__item').cloneNode(true);
+  const photoGridPhoto = newCard.querySelector('.photo-grid__photo');
+  photoGridPhoto.src = link;
+  photoGridPhoto.alt = title;
   newCard.querySelector('.photo-grid__name').textContent = title;
   // код лайка карточек
   newCard.querySelector('.photo-grid__like-button').addEventListener('click', (evt) => {
@@ -73,21 +91,21 @@ function createCard(title, link) {
   });
   // код удаления карточек
   newCard.querySelector('.photo-grid__delete-button').addEventListener('click', (evt) => {
-    evt.target.closest('li').remove();
+    evt.target.closest('.photo-grid__element').remove();
   });
   //код открытия поп апа с картинкой
-  newCard.querySelector('.photo-grid__photo').addEventListener('click', () => {
-    popUpImage.classList.add('pop-up_opened');
-    popUpImage.querySelector('.pop-up__image').src = link;
-    popUpImage.querySelector('.pop-up__image').alt = title
-    popUpImage.querySelector('.pop-up__image-subtitle').textContent = title;
+  photoGridPhoto.addEventListener('click', () => {
+    openPopup(popUpImage);
+    popUpPhoto.src = link;
+    popUpPhoto.alt = title
+    popUpSubtitle.textContent = title;
   });
   return newCard;
 }
 
 // закрытие поп апа с картинкой
 popUpImage.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  popUpImage.classList.remove('pop-up_opened')
+  closePopup(popUpImage);
 });
 
 // функция добавления карточек(из коробки+новых)
@@ -102,17 +120,17 @@ initialCards.forEach(item => addCard(item.name, item.link));
 // код формы добавления карточек:
 // 1. Открытие формы
 document.querySelector('.profile__add-button').addEventListener('click', () => {
-  addForm.classList.add('pop-up_opened');
+  openPopup(addForm)
 });
 // 2. Добавление карточек
 addForm.addEventListener('submit', evt => {
   evt.preventDefault();
   addCard(inputPlaceName.value, inputLink.value);
-  addForm.classList.remove('pop-up_opened')
+  closePopup(addForm);
 });
 // 3. Закрытие формы
 addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  addForm.classList.remove('pop-up_opened')
+  closePopup(addForm)
 });
 
 // включение валидации вызовом enableValidation
