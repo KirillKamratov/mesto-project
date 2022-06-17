@@ -63,8 +63,17 @@
       <button type="button" class="button pop-up__close-button"></button>
       <h2 class="pop-up__title">Новое место</h2>
       <form action="#" name="add-form" class="pop-up__form">
-        <input type="text" class="pop-up__text" name="place-name" placeholder="Название">
-        <input type="text" class="pop-up__text" name="link" placeholder="Ссылка на картинку">
+
+        <input type="text" class="pop-up__text" name="place-name"
+               id="add-place-name" value="" minlength="2" maxlength="40"
+               placeholder="Название" required>
+        <span class="pop-up__error add-place-name-error"></span>
+
+        <input type="url" class="pop-up__text" name="link"
+               id="add-place-link" value=""
+               placeholder="Ссылка на картинку" required>
+        <span class="pop-up__error add-place-link-error"></span>
+
         <button type="submit" class="pop-up__save-button">Создать</button>
       </form>
     </div>
