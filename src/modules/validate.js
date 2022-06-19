@@ -1,3 +1,4 @@
+//функция запуска валидации
 export const enableValidation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
@@ -8,6 +9,7 @@ export const enableValidation = (settings) => {
   });
 };
 
+//функция отображения ошибок
 const showInputError = (settings, formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(settings.inputErrorClass);
@@ -15,6 +17,7 @@ const showInputError = (settings, formElement, inputElement, errorMessage) => {
   errorElement.classList.add(settings.errorClass);
 };
 
+//функция скрытия ошибки
 const hideInputError = (settings, formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(settings.inputErrorClass);
@@ -22,6 +25,8 @@ const hideInputError = (settings, formElement, inputElement) => {
   errorElement.textContent = '';
 };
 
+
+// функция проверки валидации
 const checkInputValidity = (settings, formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     showInputError(settings, formElement, inputElement, inputElement.validationMessage);
@@ -30,30 +35,29 @@ const checkInputValidity = (settings, formElement, inputElement) => {
   }
 };
 
+// функция "вешалки" эвент лиснера
 const setEventListeners = (settings, formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
   const buttonElement = formElement.querySelector(settings.submitButtonSelector);
 
-  // чтобы проверить состояние кнопки в самом начале
   toggleButtonState(settings, inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(settings, formElement, inputElement);
-      // чтобы проверять его при изменении любого из полей
       toggleButtonState(settings, inputList, buttonElement);
     });
   });
 };
 
-
-
+// функция отображения невалидности
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 };
 
+//функция переключения кнопки
 const toggleButtonState = (settings, inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(settings.inactiveButtonClass);
