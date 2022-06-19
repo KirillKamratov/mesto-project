@@ -1,4 +1,4 @@
-import { enableValidation } from "./validate.js";
+import {enableValidation} from "./validate.js";
 // переменные формы "редактировать профиль"
 const editForm = document.querySelector('#edit-form');
 const nameInput = editForm.querySelector('[name="name"]');
@@ -48,13 +48,20 @@ const popUpSubtitle = popUpImage.querySelector('.pop-up__image-subtitle');
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description');
 
+//поп-апы
+const popUps = {
+  editForm,
+  addForm,
+  popUpImage,
+}
+
 //функция открытия поп-апов
-function openPopup (popup) {
+function openPopup(popup) {
   popup.classList.add('pop-up_opened');
 }
 
 //функция закрытия поп-апов
-function closePopup (popup) {
+function closePopup(popup) {
   popup.classList.remove('pop-up_opened');
 }
 
@@ -131,6 +138,15 @@ addForm.addEventListener('submit', evt => {
 // 3. Закрытие формы
 addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
   closePopup(addForm)
+});
+
+// Закрытие поп-апа кликом на оверлей
+Array.from(Object.values(popUps)).forEach(object => {
+  object.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('pop-up_opened')) {
+      closePopup(object)
+    }
+  })
 });
 
 // включение валидации вызовом enableValidation
