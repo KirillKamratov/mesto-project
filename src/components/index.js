@@ -1,40 +1,13 @@
 import '../pages/index.css';
-import { initialCards, cardTemplate, photoGridList } from "./cards.js";
 import { enableValidation } from "./validate.js";
-import { profileName, profileDescription, popUps, editForm, nameInput, descriptionInput, addForm,
-  inputPlaceName, inputLink, popUpPhoto, popUpImage, popUpSubtitle, openPopup, closePopup } from "./forms.js";
+import { openPopup, closePopup } from "./utils.js";
+import { nameInput, descriptionInput, inputPlaceName, inputLink } from "./modals";
+import { editForm, addForm, popUps } from "./forms";
+import { addCard } from "./cards";
 
-// код "6 карточек из коробки"
-function createCard(title, link) {
-  const newCard = cardTemplate.querySelector('.photo-grid__item').cloneNode(true);
-  const photoGridPhoto = newCard.querySelector('.photo-grid__photo');
-  photoGridPhoto.src = link;
-  photoGridPhoto.alt = title;
-  newCard.querySelector('.photo-grid__name').textContent = title;
-  // код лайка карточек
-  newCard.querySelector('.photo-grid__like-button').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('photo-grid__like-button_liked');
-  });
-  // код удаления карточек
-  newCard.querySelector('.photo-grid__delete-button').addEventListener('click', (evt) => {
-    evt.target.closest('.photo-grid__item').remove();
-  });
-  //код открытия поп апа с картинкой
-  photoGridPhoto.addEventListener('click', () => {
-    openPopup(popUpImage);
-    popUpPhoto.src = link;
-    popUpPhoto.alt = title
-    popUpSubtitle.textContent = title;
-  });
-  return newCard;
-}
-// функция добавления карточек(из коробки+новых)
-function addCard(title, link) {
-  const card = createCard(title, link);
-  photoGridList.prepend(card);
-}
-//добавление карточек из коробки
-initialCards.forEach(item => addCard(item.name, item.link));
+//общие переменные
+const profileName = document.querySelector('.profile__name')
+const profileDescription = document.querySelector('.profile__description');
 
 // код формы "редактировать профиль":
 // 1. Открытие формы
@@ -53,11 +26,6 @@ editForm.addEventListener('submit', evt => {
 // 3. Закрытие формы
 editForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
   closePopup(editForm)
-});
-
-// закрытие поп апа с картинкой
-popUpImage.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  closePopup(popUpImage);
 });
 
 // код формы добавления карточек:
