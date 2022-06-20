@@ -35,7 +35,7 @@
   <footer class="footer">
     <p class="footer__text">&copy;&nbsp;2020 Mesto Russia</p>
   </footer>
-  <div class="pop-up" id="edit-form">
+  <div class="pop-up" id="edit-pop-up">
     <div class="pop-up__container">
       <button type="button" class="button pop-up__close-button"></button>
       <h2 class="pop-up__title">Редактировать профиль</h2>
@@ -57,11 +57,11 @@
 
   </div>
 
-  <div class="pop-up" id="add-form">
+  <div class="pop-up" id="add-pop-up">
     <div class="pop-up__container">
       <button type="button" class="button pop-up__close-button"></button>
       <h2 class="pop-up__title">Новое место</h2>
-      <form action="#" name="add-form" class="pop-up__form">
+      <form action="#" name="add-form" class="pop-up__form" novalidate>
 
         <input type="text" class="pop-up__text" name="place-name"
                id="add-place-name" value="" minlength="2" maxlength="40"
