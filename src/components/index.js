@@ -1,3 +1,4 @@
+import '../pages/index.css';
 import { initialCards, cardTemplate, photoGridList } from "./cards.js";
 import { enableValidation } from "./validate.js";
 import { profileName, profileDescription, popUps, editForm, nameInput, descriptionInput, addForm,
