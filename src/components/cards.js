@@ -1,5 +1,4 @@
-import { popUpPhoto, popUpSubtitle } from "./modals";
-import { popUpImage } from "./forms";
+import { popUpPhoto, popUpSubtitle, popUpImage } from "./modals";
 import { openPopup } from "./utils";
 import { closePopup } from "./utils";
 

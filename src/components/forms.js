@@ -1,12 +1,10 @@
-const editForm = document.querySelector('#edit-form');
-const addForm = document.querySelector('#add-form');
-const popUpImage = document.querySelector('#pop-up-image');
+const editForm = document.forms['edit-form'];
+const addForm = document.forms['add-form'];
 
-//поп-апы
-const popUps = {
-  editForm,
-  addForm,
-  popUpImage,
-}
+const nameInput = editForm.querySelector('[name="name"]');
+const descriptionInput = editForm.querySelector('[name="description"]');
 
-export { editForm, addForm, popUpImage, popUps}
+const inputPlaceName = addForm.querySelector('[name = "place-name"]');
+const inputLink = addForm.querySelector('[name = "link"]');
+
+export { editForm, addForm, nameInput, descriptionInput, inputPlaceName, inputLink }
