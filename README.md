@@ -6,7 +6,8 @@
 ## В проекте использованы технологии:
  - HTML5(с добавлением формы);
  - CSS3;
- - JavaScript;
- - БЭМ.
+ - JavaScript (валидация форм, рефакторинг, новые слушатели событий);
+ - БЭМ,
+ - Webpack
 
 ## Ссылка на Github-pages:   https://kirillkamratov.github.io/mesto-project/
