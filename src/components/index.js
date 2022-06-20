@@ -1,9 +1,9 @@
 import '../pages/index.css';
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./utils.js";
-import { nameInput, descriptionInput, inputPlaceName, inputLink } from "./modals";
-import { editForm, addForm, popUps } from "./forms";
+import { nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm } from "./forms";
 import { addCard } from "./cards";
+import { addPopUp, editPopUp, popUps } from "./modals";
 
 //общие переменные
 const profileName = document.querySelector('.profile__name')
@@ -14,34 +14,35 @@ const profileDescription = document.querySelector('.profile__description');
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  openPopup(editForm)
+  openPopup(editPopUp)
 });
 //2. Редактирование информации о себе
 editForm.addEventListener('submit', evt => {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
-  closePopup(editForm);
+  closePopup(editPopUp);
 });
 // 3. Закрытие формы
-editForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  closePopup(editForm)
+editPopUp.querySelector('.pop-up__close-button').addEventListener('click', () => {
+  closePopup(editPopUp)
 });
 
 // код формы добавления карточек:
 // 1. Открытие формы
 document.querySelector('.profile__add-button').addEventListener('click', () => {
-  openPopup(addForm)
+  openPopup(addPopUp)
 });
 // 2. Добавление карточек
 addForm.addEventListener('submit', evt => {
   evt.preventDefault();
   addCard(inputPlaceName.value, inputLink.value);
-  closePopup(addForm);
+  addForm.reset();
+  closePopup(addPopUp);
 });
 // 3. Закрытие формы
-addForm.querySelector('.pop-up__close-button').addEventListener('click', () => {
-  closePopup(addForm)
+addPopUp.querySelector('.pop-up__close-button').addEventListener('click', () => {
+  closePopup(addPopUp)
 });
 
 // Закрытие поп-апа кликом на оверлей
