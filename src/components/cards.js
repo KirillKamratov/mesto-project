@@ -42,14 +42,13 @@ function addCard(title, link) {
   photoGridList.prepend(card);
 }
 //добавление карточек из коробки
-initialCards()
-  .then(res => res.json())
+initialCards ()
   .then((data) => {
     data.forEach((card) =>{
       addCard(card.name, card.link)
     })
   })
 
-  //item.name, item.link;
+
 
 export { cardTemplate, photoGridList, addCard }

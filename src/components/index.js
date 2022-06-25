@@ -4,10 +4,12 @@ import { openPopup, closePopup } from "./utils.js";
 import { nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm } from "./forms";
 import { addCard } from "./cards";
 import { addPopUp, editPopUp, popUps } from "./modals";
+import { edit } from "./api";
 
-//общие переменные
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description');
+
+
 
 // код формы "редактировать профиль":
 // 1. Открытие формы
@@ -19,9 +21,16 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 //2. Редактирование информации о себе
 editForm.addEventListener('submit', evt => {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = descriptionInput.value;
-  closePopup(editPopUp);
+  edit({
+    name: nameInput.value,
+    about: descriptionInput.value
+  })
+    .then((data) => {
+      profileName.textContent = data.name
+      profileDescription.textContent = data.about
+      closePopup(editPopUp);
+    })
+    .catch(err => console.log(err))
 });
 // 3. Закрытие формы
 editPopUp.querySelector('.pop-up__close-button').addEventListener('click', () => {
@@ -64,3 +73,6 @@ enableValidation({
   inputErrorClass: 'pop-up__text_type_error',
   errorClass: 'pop-up__error_active'
 });
+
+
+export { profileName, profileDescription }

@@ -1,34 +1,35 @@
-function someFunc () {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-13/cards', {
+const fetchConfig = {
+  link: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
+  configs: {
     headers: {
-      authorization: '04133e24-2d24-41c7-9c81-c0a879d407ce'
+      authorization: '04133e24-2d24-41c7-9c81-c0a879d407ce',
+      'Content-Type': 'application/json'
     }
-  })
-    .then(res => res.json())
-    .then((result) => {
-      console.log(result);
-    });
+  }
 }
 
-function authorization () {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-13/users/me', {
-    headers: {
-      authorization: '04133e24-2d24-41c7-9c81-c0a879d407ce'
-    }
-  })
-    .then(res => res.json())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((err) => {
-      console.log(`Что-то пошло не так: ${err}`)
-    })
+
+const isOk = (res) => {
+  if (res.ok) {
+    return res.json()
+  }
+  return Promise.reject(`Ошибка: ${res.status}, ${res.statusText}`)
 }
 
-export const initialCards = () => {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-13/cards', {
-    headers: {
-      authorization: '04133e24-2d24-41c7-9c81-c0a879d407ce'
-    }
-  })
+const initialCards = () => {
+  return fetch(`${fetchConfig.link}/cards`,
+    fetchConfig.configs)
+    .then(isOk)
 }
+
+const edit = (data) => {
+  return fetch(`${fetchConfig.link}/users/me`, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+    ...fetchConfig.configs
+  })
+    .then(isOk)
+}
+
+export { initialCards, edit }
+
