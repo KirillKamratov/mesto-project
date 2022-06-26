@@ -22,7 +22,7 @@ const initialCards = () => {
     .then(isOk)
 }
 
-const edit = (data) => {
+const editProfile = (data) => {
   return fetch(`${fetchConfig.link}/users/me`, {
     method: 'PATCH',
     body: JSON.stringify(data),
@@ -31,5 +31,14 @@ const edit = (data) => {
     .then(isOk)
 }
 
-export { initialCards, edit }
+const newCard = (card) => {
+  return fetch(`${fetchConfig.link}/cards`, {
+    method: 'POST',
+    body: JSON.stringify(card),
+    ...fetchConfig.configs
+  })
+    .then(isOk)
+}
+
+export { initialCards, editProfile, newCard }
 

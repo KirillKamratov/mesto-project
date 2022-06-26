@@ -4,7 +4,7 @@ import { openPopup, closePopup } from "./utils.js";
 import { nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm } from "./forms";
 import { addCard } from "./cards";
 import { addPopUp, editPopUp, popUps } from "./modals";
-import { edit } from "./api";
+import { editProfile, newCard } from "./api";
 
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description');
@@ -21,7 +21,7 @@ document.querySelector('.profile__edit-button').addEventListener('click', () => 
 //2. Редактирование информации о себе
 editForm.addEventListener('submit', evt => {
   evt.preventDefault();
-  edit({
+  editProfile({
     name: nameInput.value,
     about: descriptionInput.value
   })
@@ -45,9 +45,16 @@ document.querySelector('.profile__add-button').addEventListener('click', () => {
 // 2. Добавление карточек
 addForm.addEventListener('submit', evt => {
   evt.preventDefault();
-  addCard(inputPlaceName.value, inputLink.value);
-  addForm.reset();
-  closePopup(addPopUp);
+  newCard({
+    name: inputPlaceName.value,
+    link: inputLink.value
+  })
+    .then((data) =>{
+      addCard(data.name, data.link);
+      addForm.reset();
+      closePopup(addPopUp);
+    })
+    .catch(err => console.log(err))
 });
 // 3. Закрытие формы
 addPopUp.querySelector('.pop-up__close-button').addEventListener('click', () => {
