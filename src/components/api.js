@@ -70,5 +70,14 @@ const deleteCard = (cardId) => {
     .then(isOk)
 }
 
-export { initialCards, editProfile, newCard, like, disLike, getUser, deleteCard }
+const editAvatar = (avatar) => {
+  return fetch(`${fetchConfig.link}/users/me/avatar`, {
+    method: 'PATCH',
+    body: JSON.stringify({avatar}),
+    ...fetchConfig.configs
+  })
+    .then(isOk)
+}
+
+export { initialCards, editProfile, newCard, like, disLike, getUser, deleteCard, editAvatar }
 

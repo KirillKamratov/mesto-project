@@ -1,13 +1,14 @@
 import '../pages/index.css';
 import {enableValidation} from "./validate.js";
 import {openPopup, closePopup} from "./utils.js";
-import {nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm} from "./forms";
+import {nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm, avatarForm } from "./forms";
 import {addCard} from "./cards";
-import {addPopUp, editPopUp, popUps} from "./modals";
-import {editProfile, getUser, newCard, initialCards} from "./api";
+import {addPopUp, editPopUp, popUps, popUpAvatar} from "./modals";
+import {editProfile, getUser, newCard, initialCards, editAvatar} from "./api";
 
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description');
+const avatar = document.querySelector('.profile__avatar')
 let myId;
 
 Promise.all([getUser(), initialCards()])
@@ -16,7 +17,6 @@ Promise.all([getUser(), initialCards()])
     results[1].forEach((card) =>{
       addCard(card.name, card.link, card._id, card.likes, myId, card.owner._id)
     })
-    console.log(results)
   })
 // код формы "редактировать профиль":
 // 1. Открытие формы
@@ -67,6 +67,22 @@ addForm.addEventListener('submit', evt => {
 addPopUp.querySelector('.pop-up__close-button').addEventListener('click', () => {
   closePopup(addPopUp)
 });
+
+document.querySelector('.profile__edit-avatar').addEventListener('click', () => {
+  openPopup(popUpAvatar)
+})
+avatarForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  editAvatar(avatarForm.link.value)
+    .then((data) => {
+      avatar.src = data.avatar
+      avatarForm.reset();
+      closePopup(popUpAvatar)
+    })
+})
+popUpAvatar.querySelector('.pop-up__close-button').addEventListener('click', () => {
+  closePopup(popUpAvatar)
+})
 
 // Закрытие поп-апа кликом на оверлей
 Array.from(Object.values(popUps)).forEach(object => {
