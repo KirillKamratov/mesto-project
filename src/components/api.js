@@ -40,5 +40,35 @@ const newCard = (card) => {
     .then(isOk)
 }
 
-export { initialCards, editProfile, newCard }
+const like = (cardId) => {
+  return fetch(`${fetchConfig.link}/cards/likes/${cardId}`, {
+    method: 'PUT',
+    ...fetchConfig.configs
+  })
+    .then(isOk)
+}
+
+const disLike = (cardId) => {
+  return fetch(`${fetchConfig.link}/cards/likes/${cardId}`, {
+    method: 'DELETE',
+    ...fetchConfig.configs
+  })
+    .then(isOk)
+}
+
+const getUser = () => {
+  return fetch(`${fetchConfig.link}/users/me`,
+    fetchConfig.configs)
+    .then(isOk)
+}
+
+const deleteCard = (cardId) => {
+  return fetch(`${fetchConfig.link}/cards/${cardId}`, {
+    method: 'DELETE',
+    ...fetchConfig.configs
+  })
+    .then(isOk)
+}
+
+export { initialCards, editProfile, newCard, like, disLike, getUser, deleteCard }
 

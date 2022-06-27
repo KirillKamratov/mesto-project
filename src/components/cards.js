@@ -1,25 +1,60 @@
-import { popUpPhoto, popUpSubtitle, popUpImage } from "./modals";
-import { openPopup } from "./utils";
-import { closePopup } from "./utils";
-import { initialCards } from "./api";
+import {popUpPhoto, popUpSubtitle, popUpImage} from "./modals";
+import {openPopup} from "./utils";
+import {closePopup} from "./utils";
+import {like, disLike, deleteCard} from "./api";
+
+const setLike = (likeContainer, id, quantity) => {
+  if (likeContainer.classList.contains('photo-grid__like-button_liked')) {
+    disLike(id)
+      .then((data) => {
+        likeContainer.classList.remove('photo-grid__like-button_liked')
+        quantity.textContent = data.likes.length
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  } else {
+    like(id)
+      .then((data) => {
+        likeContainer.classList.add('photo-grid__like-button_liked')
+        quantity.textContent = data.likes.length
+      })
+      .catch(err => console.log(err))
+  }
+}
 
 const cardTemplate = document.querySelector('#card-template').content;
 const photoGridList = document.querySelector('.photo-grid__list');
 
+
 // код "6 карточек из коробки"
-function createCard(title, link) {
+function createCard(title, link, id, likesQuantity, selfId, ownerId) {
   const newCard = cardTemplate.querySelector('.photo-grid__item').cloneNode(true);
   const photoGridPhoto = newCard.querySelector('.photo-grid__photo');
+  const likeButton = newCard.querySelector('.photo-grid__like-button');
+  const likeQuantity = newCard.querySelector('.photo-grid__like-quantity');
+  const deleteButton = newCard.querySelector('.photo-grid__delete-button')
+  if (likesQuantity.find(elem => elem._id === selfId)) {
+    likeButton.classList.add('photo-grid__like-button_liked')
+  }
+  if (ownerId !== selfId) {
+    deleteButton.classList.add('photo-grid__delete-button_disabled')
+  }
+  newCard.dataset.id = id;
   photoGridPhoto.src = link;
   photoGridPhoto.alt = title;
+  likeQuantity.textContent = likesQuantity.length;
   newCard.querySelector('.photo-grid__name').textContent = title;
   // код лайка карточек
-  newCard.querySelector('.photo-grid__like-button').addEventListener('click', (evt) => {
-    evt.target.classList.toggle('photo-grid__like-button_liked');
-  });
+  likeButton.addEventListener('click', () => {
+    setLike(likeButton, newCard.dataset.id, likeQuantity)
+  })
   // код удаления карточек
-  newCard.querySelector('.photo-grid__delete-button').addEventListener('click', (evt) => {
-    evt.target.closest('.photo-grid__item').remove();
+  deleteButton.addEventListener('click', (evt) => {
+    deleteCard(newCard.dataset.id)
+      .then((data) => {
+        evt.target.closest('.photo-grid__item').remove();
+      })
   });
   //код открытия поп апа с картинкой
   photoGridPhoto.addEventListener('click', () => {
@@ -37,18 +72,13 @@ popUpImage.querySelector('.pop-up__close-button').addEventListener('click', () =
 });
 
 // функция добавления карточек(из коробки+новых)
-function addCard(title, link) {
-  const card = createCard(title, link);
+function addCard(title, link, id, likesQuantity, selfId, ownerId) {
+  const card = createCard(title, link, id, likesQuantity, selfId, ownerId);
   photoGridList.prepend(card);
 }
+
 //добавление карточек из коробки
-initialCards ()
-  .then((data) => {
-    data.forEach((card) =>{
-      addCard(card.name, card.link)
-    })
-  })
 
 
 
-export { cardTemplate, photoGridList, addCard }
+export {cardTemplate, photoGridList, addCard}

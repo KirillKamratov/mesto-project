@@ -90,12 +90,15 @@
 
 <template id="card-template">
   <li>
-    <div class="photo-grid__item">
+    <div class="photo-grid__item" data-id="">
       <button type="button" class="photo-grid__delete-button"></button>
       <img src="" alt="" class="photo-grid__photo">
       <div class="photo-grid__caption">
         <h2 class="photo-grid__name"></h2>
-        <button type="button" class="photo-grid__like-button"></button>
+        <div class="photo-grid__like-container">
+          <button type="button" class="photo-grid__like-button"></button>
+          <span class="photo-grid__like-quantity"></span>
+        </div>
       </div>
     </div>
   </li>

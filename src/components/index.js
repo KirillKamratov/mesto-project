@@ -1,16 +1,23 @@
 import '../pages/index.css';
-import { enableValidation } from "./validate.js";
-import { openPopup, closePopup } from "./utils.js";
-import { nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm } from "./forms";
-import { addCard } from "./cards";
-import { addPopUp, editPopUp, popUps } from "./modals";
-import { editProfile, newCard } from "./api";
+import {enableValidation} from "./validate.js";
+import {openPopup, closePopup} from "./utils.js";
+import {nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm} from "./forms";
+import {addCard} from "./cards";
+import {addPopUp, editPopUp, popUps} from "./modals";
+import {editProfile, getUser, newCard, initialCards} from "./api";
 
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description');
+let myId;
 
-
-
+Promise.all([getUser(), initialCards()])
+  .then((results) => {
+    myId = results[0]._id
+    results[1].forEach((card) =>{
+      addCard(card.name, card.link, card._id, card.likes, myId, card.owner._id)
+    })
+    console.log(results)
+  })
 // код формы "редактировать профиль":
 // 1. Открытие формы
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
@@ -49,8 +56,8 @@ addForm.addEventListener('submit', evt => {
     name: inputPlaceName.value,
     link: inputLink.value
   })
-    .then((data) =>{
-      addCard(data.name, data.link);
+    .then((data) => {
+      addCard(data.name, data.link, data._id, data.likes, id);
       addForm.reset();
       closePopup(addPopUp);
     })
@@ -82,4 +89,4 @@ enableValidation({
 });
 
 
-export { profileName, profileDescription }
+export {profileName, profileDescription, myId}

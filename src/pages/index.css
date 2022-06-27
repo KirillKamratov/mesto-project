@@ -29,6 +29,9 @@
 @import url('../blocks/photo-grid/__like-button/photo-grid__like-button.css');
 @import url('../blocks/photo-grid/__like-button/_liked/photo-grid__like-button_liked.css');
 @import url('../blocks/photo-grid/__delete-button/photo-grid__delete-button.css');
+@import url('../blocks/photo-grid/__like-quantity/photo-grid__like-quantity.css');
+@import url('../blocks/photo-grid/__like-container/photo-grid__like-container.css');
+@import url('../blocks/photo-grid/__delete-button/_disabled/photo-grid__delete-button_disabled.css');
 
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__text/footer__text.css');
