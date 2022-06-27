@@ -13,6 +13,9 @@ let myId;
 
 Promise.all([getUser(), initialCards()])
   .then((results) => {
+    profileName.textContent = results[0].name
+    profileDescription.textContent = results[0].about
+    avatar.src = results[0].avatar
     myId = results[0]._id
     results[1].forEach((card) =>{
       addCard(card.name, card.link, card._id, card.likes, myId, card.owner._id)

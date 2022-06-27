@@ -8,4 +8,6 @@ const descriptionInput = editForm.querySelector('[name="description"]');
 const inputPlaceName = addForm.querySelector('[name = "place-name"]');
 const inputLink = addForm.querySelector('[name = "link"]');
 
+
+
 export { editForm, addForm, nameInput, descriptionInput, inputPlaceName, inputLink, avatarForm }
