@@ -54,6 +54,7 @@ function createCard(title, link, id, likesQuantity, selfId, ownerId) {
       .then((data) => {
         evt.target.closest('.photo-grid__item').remove();
       })
+      .catch(err => console.log(err))
   });
   //код открытия поп апа с картинкой
   photoGridPhoto.addEventListener('click', () => {
