@@ -1,36 +1,38 @@
 import '../pages/index.css';
 import {enableValidation} from "./validate.js";
-import {openPopup, closePopup} from "./utils.js";
-import {nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm, avatarForm } from "./forms";
+import {openPopup, closePopup, loading} from "./utils.js";
+import { nameInput, descriptionInput, inputPlaceName, inputLink, editForm, addForm, avatarForm, profileName,
+profileDescription } from "./forms";
 import {addCard} from "./cards";
 import {addPopUp, editPopUp, popUps, popUpAvatar} from "./modals";
 import {editProfile, getUser, newCard, initialCards, editAvatar} from "./api";
 
-const profileName = document.querySelector('.profile__name')
-const profileDescription = document.querySelector('.profile__description');
-const avatar = document.querySelector('.profile__avatar')
 let myId;
+
+const avatar = document.querySelector('.profile__avatar');
+
 
 Promise.all([getUser(), initialCards()])
   .then((results) => {
-    profileName.textContent = results[0].name
-    profileDescription.textContent = results[0].about
-    avatar.src = results[0].avatar
-    myId = results[0]._id
-    results[1].forEach((card) =>{
+    profileName.textContent = results[0].name;
+    profileDescription.textContent = results[0].about;
+    avatar.src = results[0].avatar;
+    myId = results[0]._id;
+    results[1].forEach((card) => {
       addCard(card.name, card.link, card._id, card.likes, myId, card.owner._id)
-    })
-  })
+    });
+  });
 // код формы "редактировать профиль":
 // 1. Открытие формы
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  openPopup(editPopUp)
+  openPopup(editPopUp);
 });
 //2. Редактирование информации о себе
 editForm.addEventListener('submit', evt => {
   evt.preventDefault();
+  loading(true, editForm)
   editProfile({
     name: nameInput.value,
     about: descriptionInput.value
@@ -41,6 +43,9 @@ editForm.addEventListener('submit', evt => {
       closePopup(editPopUp);
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      loading(false, editForm)
+    })
 });
 // 3. Закрытие формы
 editPopUp.querySelector('.pop-up__close-button').addEventListener('click', () => {
@@ -55,16 +60,20 @@ document.querySelector('.profile__add-button').addEventListener('click', () => {
 // 2. Добавление карточек
 addForm.addEventListener('submit', evt => {
   evt.preventDefault();
+  loading(true, addForm)
   newCard({
     name: inputPlaceName.value,
     link: inputLink.value
   })
     .then((data) => {
-      addCard(data.name, data.link, data._id, data.likes, id);
+      addCard(data.name, data.link, data._id, data.likes, myId, data.owner._id)
       addForm.reset();
       closePopup(addPopUp);
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      loading(false, addForm)
+    })
 });
 // 3. Закрытие формы
 addPopUp.querySelector('.pop-up__close-button').addEventListener('click', () => {
@@ -76,11 +85,16 @@ document.querySelector('.profile__edit-avatar').addEventListener('click', () => 
 })
 avatarForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
+  loading(true, avatarForm)
   editAvatar(avatarForm.link.value)
     .then((data) => {
       avatar.src = data.avatar
       avatarForm.reset();
       closePopup(popUpAvatar)
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      loading(false, avatarForm)
     })
 })
 popUpAvatar.querySelector('.pop-up__close-button').addEventListener('click', () => {
@@ -108,4 +122,4 @@ enableValidation({
 });
 
 
-export {profileName, profileDescription, myId}
+export {myId}

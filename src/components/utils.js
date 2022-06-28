@@ -17,4 +17,13 @@ function closePopup(popup) {
   document.removeEventListener('keydown', escapePopUP)
 }
 
-export { openPopup, closePopup}
+const loading = (isLoading, form, usualMessage='Сохранить') => {
+  if (isLoading) {
+    form.querySelector('.pop-up__save-button').textContent = 'Сохранение...';
+  }
+  else {
+    form.querySelector('.pop-up__save-button').textContent = usualMessage;
+  }
+}
+
+export { openPopup, closePopup, loading}

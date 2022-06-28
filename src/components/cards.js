@@ -1,6 +1,5 @@
 import {popUpPhoto, popUpSubtitle, popUpImage} from "./modals";
-import {openPopup} from "./utils";
-import {closePopup} from "./utils";
+import {openPopup, closePopup} from "./utils";
 import {like, disLike, deleteCard} from "./api";
 
 const setLike = (likeContainer, id, quantity) => {

@@ -8,6 +8,9 @@ const descriptionInput = editForm.querySelector('[name="description"]');
 const inputPlaceName = addForm.querySelector('[name = "place-name"]');
 const inputLink = addForm.querySelector('[name = "link"]');
 
+const profileName = document.querySelector('.profile__name')
+const profileDescription = document.querySelector('.profile__description');
 
 
-export { editForm, addForm, nameInput, descriptionInput, inputPlaceName, inputLink, avatarForm }
+export { editForm, addForm, nameInput, descriptionInput, inputPlaceName, inputLink, avatarForm,
+  profileName, profileDescription }
