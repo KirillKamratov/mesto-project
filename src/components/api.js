@@ -1,5 +1,5 @@
 const fetchConfig = {
-  link: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
+  baseURL: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
   configs: {
     headers: {
       authorization: '04133e24-2d24-41c7-9c81-c0a879d407ce',
@@ -13,17 +13,17 @@ const isOk = (res) => {
   if (res.ok) {
     return res.json()
   }
-  return Promise.reject(`Ошибка: ${res.status}, ${res.statusText}`)
+  return Promise.reject(`Ошибка: ${res.status}`)
 }
 
 const initialCards = () => {
-  return fetch(`${fetchConfig.link}/cards`,
+  return fetch(`${fetchConfig.baseURL}/cards`,
     fetchConfig.configs)
     .then(isOk)
 }
 
 const editProfile = (data) => {
-  return fetch(`${fetchConfig.link}/users/me`, {
+  return fetch(`${fetchConfig.baseURL}/users/me`, {
     method: 'PATCH',
     body: JSON.stringify(data),
     ...fetchConfig.configs
@@ -32,7 +32,7 @@ const editProfile = (data) => {
 }
 
 const newCard = (card) => {
-  return fetch(`${fetchConfig.link}/cards`, {
+  return fetch(`${fetchConfig.baseURL}/cards`, {
     method: 'POST',
     body: JSON.stringify(card),
     ...fetchConfig.configs
@@ -41,7 +41,7 @@ const newCard = (card) => {
 }
 
 const like = (cardId) => {
-  return fetch(`${fetchConfig.link}/cards/likes/${cardId}`, {
+  return fetch(`${fetchConfig.baseURL}/cards/likes/${cardId}`, {
     method: 'PUT',
     ...fetchConfig.configs
   })
@@ -49,7 +49,7 @@ const like = (cardId) => {
 }
 
 const disLike = (cardId) => {
-  return fetch(`${fetchConfig.link}/cards/likes/${cardId}`, {
+  return fetch(`${fetchConfig.baseURL}/cards/likes/${cardId}`, {
     method: 'DELETE',
     ...fetchConfig.configs
   })
@@ -57,13 +57,13 @@ const disLike = (cardId) => {
 }
 
 const getUser = () => {
-  return fetch(`${fetchConfig.link}/users/me`,
+  return fetch(`${fetchConfig.baseURL}/users/me`,
     fetchConfig.configs)
     .then(isOk)
 }
 
 const deleteCard = (cardId) => {
-  return fetch(`${fetchConfig.link}/cards/${cardId}`, {
+  return fetch(`${fetchConfig.baseURL}/cards/${cardId}`, {
     method: 'DELETE',
     ...fetchConfig.configs
   })
@@ -71,7 +71,7 @@ const deleteCard = (cardId) => {
 }
 
 const editAvatar = (avatar) => {
-  return fetch(`${fetchConfig.link}/users/me/avatar`, {
+  return fetch(`${fetchConfig.baseURL}/users/me/avatar`, {
     method: 'PATCH',
     body: JSON.stringify({avatar}),
     ...fetchConfig.configs

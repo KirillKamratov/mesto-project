@@ -20,8 +20,10 @@ Promise.all([getUser(), initialCards()])
     myId = results[0]._id;
     results[1].forEach((card) => {
       addCard(card.name, card.link, card._id, card.likes, myId, card.owner._id)
-    });
-  });
+    })
+  })
+  .catch(err => console.log(err));
+
 // код формы "редактировать профиль":
 // 1. Открытие формы
 document.querySelector('.profile__edit-button').addEventListener('click', () => {
