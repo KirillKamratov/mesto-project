@@ -17,6 +17,7 @@
   <main class="main">
     <section class="profile">
       <img src="<%=require('./images/profile_avatar.png')%>" alt="Фото профиля" class="profile__avatar">
+      <div class="profile__edit-avatar"></div>
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button type="button" class="button profile__edit-button"></button>
@@ -78,6 +79,22 @@
     </div>
   </div>
 
+  <div class="pop-up" id="edit-avatar-pop-up">
+    <div class="pop-up__container">
+      <button type="button" class="button pop-up__close-button"></button>
+      <h2 class="pop-up__title">Обновить аватар</h2>
+      <form action="#" name="avatar-form" class="pop-up__form" novalidate>
+
+        <input type="url" class="pop-up__text" name="link"
+               id="edit-avatar-link" value=""
+               placeholder="Ссылка на картинку" required>
+        <span class="pop-up__error edit-avatar-link-error"></span>
+
+        <button type="submit" class="pop-up__save-button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
   <div class="pop-up pop-up__fullscreen-photo" id="pop-up-image">
     <div class="pop-up__photo-container">
       <button type="button" class="button pop-up__close-button"></button>
@@ -90,12 +107,15 @@
 
 <template id="card-template">
   <li>
-    <div class="photo-grid__item">
+    <div class="photo-grid__item" data-id="">
       <button type="button" class="photo-grid__delete-button"></button>
       <img src="" alt="" class="photo-grid__photo">
       <div class="photo-grid__caption">
         <h2 class="photo-grid__name"></h2>
-        <button type="button" class="photo-grid__like-button"></button>
+        <div class="photo-grid__like-container">
+          <button type="button" class="photo-grid__like-button"></button>
+          <span class="photo-grid__like-quantity"></span>
+        </div>
       </div>
     </div>
   </li>
