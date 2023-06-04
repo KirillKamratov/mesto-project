@@ -91,7 +91,7 @@ class Api {
 export default new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
   headers: {
-    authorization: '0347b600-c1ce-41de-a88e-cd44ae7745f0',
+    authorization: '04133e24-2d24-41c7-9c81-c0a879d407ce',
     'Content-Type': 'application/json'
   }
 });
