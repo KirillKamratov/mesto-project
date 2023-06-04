@@ -1,0 +1,12 @@
+.pics__delete {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 18px;
+  height: 19px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  background-image: url(../../../images/delete.svg);
+}

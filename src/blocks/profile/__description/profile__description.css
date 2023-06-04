@@ -4,21 +4,30 @@
   font-size: 18px;
   line-height: 22px;
   color: #FFFFFF;
-  grid-row: 2/3;
-  grid-column: 2/3;
   margin: 0;
+  padding: 0;
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  justify-self: start;
+  align-self: start;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 336px;
+  max-width: 520px;
 }
 
-@media screen and (max-width : 767px) {
+@media screen and (max-width: 1024px) {
   .profile__description {
-    margin-top: 7px;
+    max-width: 360px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__description {
+    align-self: center;
     font-size: 14px;
     line-height: 17px;
-    text-align: center;
-    width: 100%;
+    margin-bottom: 33px;
+    max-width: 246px;
   }
 }
